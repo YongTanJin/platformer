@@ -316,7 +316,7 @@ class Enemy(pygame.sprite.Sprite):
       self.move_direction *= -1
       self.move_counter *= -1
 
-# กำหนดคลาสศัตรู  Lava
+# กำหนดคลาส  Lava
 class Lava(pygame.sprite.Sprite):
   def __init__(self, x, y):
     pygame.sprite.Sprite.__init__(self)
@@ -326,7 +326,7 @@ class Lava(pygame.sprite.Sprite):
     self.rect.x = x
     self.rect.y = y
 
-# กำหนดคลาสศัตรู  Coin
+# กำหนดคลาส  Coin
 class Coin(pygame.sprite.Sprite):
   def __init__(self, x, y):
     pygame.sprite.Sprite.__init__(self)
@@ -335,7 +335,7 @@ class Coin(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.rect.center = (x, y)
 
-# กำหนดคลาสศัตรู Exit
+# กำหนดคลาส Exit
 class Exit(pygame.sprite.Sprite):
   def __init__(self, x, y):
     pygame.sprite.Sprite.__init__(self)
@@ -395,6 +395,7 @@ class HowToPlayScreen: #สร้างหน้า how to play
         
     def display(self, screen): #สร้างหน้าจอถมขาวให้วาง text
         screen.fill((255, 255, 255))  # Fill the screen with white background
+        screen.blit(bg_img, (0, 0))
         y_offset = 50
         for line in self.instructions:
             text = self.font.render(line, True, (0, 0, 0))
