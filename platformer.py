@@ -52,6 +52,13 @@ how_to_play_img = pygame.image.load("img/how_to_play_btn.png")
 back_img = pygame.image.load("img/back_btn.png")
 logo_img = pygame.image.load("img/logo.png")
 sky_img = pygame.image.load("img/sky.png")
+character_images = [
+    pygame.image.load("img/char0/w1.png"),  
+    pygame.image.load("img/char1/w1.png"),
+    pygame.image.load("img/char2/w1.png")
+]
+
+selected_character_index = 0
 
 #load sounds
 pygame.mixer.music.load('img/music.wav') # เสียงในเกม
@@ -230,7 +237,7 @@ class Player():
     self.index = 0
     self.counter = 0
     for num in range(1, 5):
-      img_right = pygame.image.load(f'img/w{num}.png')
+      img_right = pygame.image.load(f'img/char{selected_character_index}/w{num}.png')
       img_right = pygame.transform.scale(img_right, (40, 80))
       img_left = pygame.transform.flip(img_right, True, False)
       self.images_right.append(img_right)
@@ -444,19 +451,20 @@ restart_button = Button(screen_width // 2 - 100, screen_height // 2 + 100, resta
 back_button = Button(screen_width // 2 + 50, screen_height // 2 + 100, back_img) #รอใส่
 start_button = Button(screen_width // 2 - 390, screen_height // 2, start_img)
 exit_button = Button(screen_width // 2 + 150, screen_height // 2, exit_img)
-how_to_play_button = Button(screen_width // 2 - 30, screen_height // 2 + 50, how_to_play_img) #รอรูป
+how_to_play_button = Button(screen_width // 2 - 30, screen_height // 2 + 150, how_to_play_img) #รอรูป
 
 sky_rect = sky_img.get_rect(topleft=(0, 0))
 sky_rect2 = sky_img.get_rect(topleft=(screen_width, 0))
 scroll_speed = 1
+selected_character_index 
 
 # ลูปเกมหลัก
 run = True
 while run:
   clock.tick(fps)
-
+  
   screen.blit(bg_img, (0, 0))
-  screen.blit(sun_img, (100, 100))
+  screen.blit(sun_img, (100, 100))  
   sky_rect.x -= scroll_speed
   sky_rect2.x -= scroll_speed
   if sky_rect.right <= 0:
@@ -468,7 +476,19 @@ while run:
   
   if main_menu == True:
       # หน้าจอหลัก
-    screen.blit(logo_img, (250,100))
+    screen.blit(logo_img, (250,10))
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+      elif event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+          selected_character_index = (selected_character_index - 1) % len(character_images)
+        elif event.key == pygame.K_RIGHT:
+          selected_character_index = (selected_character_index + 1) % len(character_images)
+        elif event.key == pygame.K_RETURN:
+          running = False
+    character_rect = character_images[selected_character_index].get_rect(center=(screen_width // 2, screen_height // 2))
+    screen.blit(character_images[selected_character_index], character_rect)
     if exit_button.draw():
       run = False
     if start_button.draw():
