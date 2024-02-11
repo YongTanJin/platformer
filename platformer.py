@@ -459,6 +459,8 @@ while run:
     if exit_button.draw():
       run = False
     if start_button.draw():
+      level = 0
+      score = 0
       world_data = []
       world = reset_level(level)
       game_over = 0
@@ -501,8 +503,9 @@ while run:
     if game_over == -1:
       if restart_button.draw():
         world_data = []
-        reset_level(level)
+        world = reset_level(level)
         game_over = 0
+        score = 0
       if back_button.draw():
         main_menu = True
         
@@ -518,7 +521,7 @@ while run:
       else:
         draw_text('YOU WIN!', font, blue, (screen_width // 2) - 140, screen_height // 2)
         if restart_button.draw():
-          level = 1
+          level = 0
           # reset level
           world_data = []
           world = reset_level(level)
@@ -531,4 +534,4 @@ while run:
 
   pygame.display.update()
 
-pygame.quit()  
+pygame.quit()
