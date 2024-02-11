@@ -415,7 +415,7 @@ class HowToPlayScreen: #สร้างหน้า how to play
             pygame.display.flip()
 
         return
-
+      
 # กำหนดผู้เล่นและกลุ่มสไปรต์เริ่มต้น
 player = Player(100, screen_height - 130)
 
@@ -445,6 +445,9 @@ start_button = Button(screen_width // 2 - 390, screen_height // 2, start_img)
 exit_button = Button(screen_width // 2 + 150, screen_height // 2, exit_img)
 how_to_play_button = Button(screen_width // 2 - 30, screen_height // 2 + 50, how_to_play_img) #รอรูป
 
+sky_rect = sky_img.get_rect(topleft=(0, 0))
+sky_rect2 = sky_img.get_rect(topleft=(screen_width, 0))
+scroll_speed = 1
 
 # ลูปเกมหลัก
 run = True
@@ -453,8 +456,15 @@ while run:
 
   screen.blit(bg_img, (0, 0))
   screen.blit(sun_img, (100, 100))
-  screen.blit(sky_img, (0, 0))
-
+  sky_rect.x -= scroll_speed
+  sky_rect2.x -= scroll_speed
+  if sky_rect.right <= 0:
+    sky_rect.x = 0
+  if sky_rect2.right <= 0:
+    sky_rect2.x = 0
+  screen.blit(sky_img, sky_rect)
+  screen.blit(sky_img, sky_rect2)
+  
   if main_menu == True:
       # หน้าจอหลัก
     screen.blit(logo_img, (250,100))
@@ -469,7 +479,7 @@ while run:
       main_menu = False
     if how_to_play_button.draw():
       how_to_play_screen.run(screen)
-    
+      
   else:
     world.draw()
 
