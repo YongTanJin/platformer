@@ -98,7 +98,7 @@ class Button():
     #รับตำแหน่งเมาส์
     pos = pygame.mouse.get_pos()
 
-    #ตรวจสอบเมาส์โอเวอร์และเงื่อนไขการคลิก
+    #ตรวจสอบตำแหน่งเมาส์และสร้างเงื่อนไขการคลิก
     if self.rect.collidepoint(pos):
       if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
         action = True
