@@ -51,6 +51,7 @@ exit_img = pygame.image.load('img/exit_btn.png') # ปุ่มออก
 how_to_play_img = pygame.image.load("img/how_to_play_btn.png")
 back_img = pygame.image.load("img/back_btn.png")
 logo_img = pygame.image.load("img/logo.png")
+sky_img = pygame.image.load("img/sky.png")
 
 #load sounds
 pygame.mixer.music.load('img/music.wav') # เสียงในเกม
@@ -452,6 +453,7 @@ while run:
 
   screen.blit(bg_img, (0, 0))
   screen.blit(sun_img, (100, 100))
+  screen.blit(sky_img, (0, 0))
 
   if main_menu == True:
       # หน้าจอหลัก
